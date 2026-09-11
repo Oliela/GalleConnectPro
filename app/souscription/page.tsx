@@ -59,7 +59,7 @@ export default function SouscriptionPage() {
       toast.error("Vous devez accepter les conditions générales pour signer votre demande.")
       return
     }
-    console.log("Formulaire soumis:", form) // Pour le débogage, à retirer en production
+    // console.log("Formulaire soumis:", form) // Pour le débogage, à retirer en production
     try {
       const response = await fetch("/api/souscriptions", {
         method: "POST",
