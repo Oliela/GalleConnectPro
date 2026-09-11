@@ -49,7 +49,9 @@ const subjects = [
   { value: "Questions sur les tarifs", label: "Questions sur les tarifs" },
   { value: "Partenariat", label: "Partenariat" },
   // { value: "Support technique", label: "Support technique" },
+  { value: "Question sur la licence", label: "Question sur la licence" },
   { value: "Autre demande", label: "Autre demande" },
+
 ]
 
 export default function ContactPage() {

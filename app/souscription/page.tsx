@@ -18,7 +18,7 @@ const offres = [
   { value: "STARTER", label: "Starter", description: "Pour démarrer simplement", prix: "20 000 FCFA" },
   { value: "BUSINESS", label: "Business", description: "Pour les agences en croissance", prix: "35 000 FCFA" },
   { value: "PRO", label: "Pro", description: "Pour piloter votre activité", prix: "50 000 FCFA" },
-  { value: "LICENCE", label: "Licence", description: "Pour un besoin sur mesure", prix: "2 500 000 FCFA" },
+  // { value: "LICENCE", label: "Licence", description: "Pour un besoin sur mesure", prix: "2 500 000 FCFA" },
 ]
 
 const numeroPaiement = "78 181 65 50"

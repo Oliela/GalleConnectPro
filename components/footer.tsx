@@ -21,8 +21,8 @@ const solutions = [
 ]
 
 const legal = [
-  { href: "https://galleconnect.com/privacy", label: "Politique de confidentialité" },
-  { href: "https://galleconnect.com/condition_utilisation", label: "Conditions d’utilisation" },
+  { href: "/politique-confidentialite", label: "Politique de confidentialité" },
+  { href: "/conditions-utilisation", label: "Conditions d’utilisation" },
   // { href: "#", label: "Mentions légales" },
 ]
 

@@ -129,7 +129,7 @@ export default function PricingPage() {
                     </div>
                   </div>
                   <Button size="lg" asChild className={`mt-8 w-full ${plan.highlighted ? "bg-[#f5a000] text-[#22313f] hover:bg-[#df9000]" : "bg-[#22313f] text-white hover:bg-[#17232d]"}`}>
-                    <Link href="/souscription">Souscrire <ArrowRight className="h-4 w-4" /></Link>
+                    <Link href={plan.name === "Licence entreprise" ? "/contact" : "/souscription"}>{plan.cta} <ArrowRight className="h-4 w-4" /></Link>
                   </Button>
 
                   <div className={`mt-10 border-t pt-5 ${plan.highlighted ? "border-slate-600" : "border-[#e7ebf0]"}`}>
