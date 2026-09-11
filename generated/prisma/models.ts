@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Agence'
+export type * from './models/Souscription'
 export type * from './commonInputTypes'

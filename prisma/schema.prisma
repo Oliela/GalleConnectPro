@@ -26,4 +26,27 @@ model Agence {
   commentaire     String? // champ optionnel
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  souscriptions Souscription[]
+}
+
+model Souscription {
+  id Int @id @default(autoincrement())
+
+  agenceId Int?
+  agence   Agence? @relation(fields: [agenceId], references: [id])
+
+  offre              String
+  nombreUtilisateurs Int?
+  modePaiement       String?
+
+  statut String @default("PENDING")
+
+  conditionsAcceptees Boolean @default(false)
+
+  dateSouscription DateTime  @default(now())
+  dateValidation   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

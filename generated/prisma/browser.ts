@@ -22,3 +22,8 @@ export * from './enums';
  * 
  */
 export type Agence = Prisma.AgenceModel
+/**
+ * Model Souscription
+ *
+ */
+export type Souscription = Prisma.SouscriptionModel

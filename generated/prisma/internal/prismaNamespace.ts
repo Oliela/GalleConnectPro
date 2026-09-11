@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Agence: 'Agence'
+  Agence: 'Agence',
+  Souscription: 'Souscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "agence"
+    modelProps: "agence" | "souscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Souscription: {
+      payload: Prisma.$SouscriptionPayload<ExtArgs>
+      fields: Prisma.SouscriptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SouscriptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SouscriptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>
+        }
+        findFirst: {
+          args: Prisma.SouscriptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SouscriptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>
+        }
+        findMany: {
+          args: Prisma.SouscriptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>[]
+        }
+        create: {
+          args: Prisma.SouscriptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>
+        }
+        createMany: {
+          args: Prisma.SouscriptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SouscriptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>[]
+        }
+        delete: {
+          args: Prisma.SouscriptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>
+        }
+        update: {
+          args: Prisma.SouscriptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SouscriptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SouscriptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SouscriptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SouscriptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SouscriptionPayload>
+        }
+        aggregate: {
+          args: Prisma.SouscriptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSouscription>
+        }
+        groupBy: {
+          args: Prisma.SouscriptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SouscriptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SouscriptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SouscriptionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -533,6 +608,23 @@ export const AgenceScalarFieldEnum = {
 } as const
 
 export type AgenceScalarFieldEnum = (typeof AgenceScalarFieldEnum)[keyof typeof AgenceScalarFieldEnum]
+
+
+export const SouscriptionScalarFieldEnum = {
+  id: 'id',
+  agenceId: 'agenceId',
+  offre: 'offre',
+  nombreUtilisateurs: 'nombreUtilisateurs',
+  modePaiement: 'modePaiement',
+  statut: 'statut',
+  conditionsAcceptees: 'conditionsAcceptees',
+  dateSouscription: 'dateSouscription',
+  dateValidation: 'dateValidation',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SouscriptionScalarFieldEnum = (typeof SouscriptionScalarFieldEnum)[keyof typeof SouscriptionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -723,6 +815,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   agence?: Prisma.AgenceOmit
+  souscription?: Prisma.SouscriptionOmit
 }
 
 /* Types for Logging */

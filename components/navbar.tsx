@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/", label: "Accueil" },
   { href: "/plateforme", label: "Plateforme" },
   { href: "/solutions", label: "Solutions" },
-  // { href: "/tarifs", label: "Tarifs" },
+  { href: "/tarifs", label: "Tarifs" },
   { href: "/contact", label: "Contact" },
 ]
 
@@ -50,7 +50,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 md:flex">
           <Button size="sm" asChild className="bg-[#d99306] text-white hover:bg-[#c08505]">
-            <Link href="/waitlist">Rejoindre la liste d'attente</Link>
+            <Link href="/souscription">Souscrire</Link>
           </Button>
         </div>
 
@@ -80,7 +80,7 @@ export function Navbar() {
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
               <Button size="sm" asChild className="bg-[#d99306] text-white hover:bg-[#c08505]">
-                <Link href="/waitlist">Rejoindre la liste d'attente</Link>
+                <Link href="/souscription" onClick={() => setMobileMenuOpen(false)}>Souscrire</Link>
               </Button>
             </div>
           </div>

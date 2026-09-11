@@ -272,6 +272,7 @@ export type AgenceWhereInput = {
   commentaire?: Prisma.StringNullableFilter<"Agence"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
+  souscriptions?: Prisma.SouscriptionListRelationFilter
 }
 
 export type AgenceOrderByWithRelationInput = {
@@ -287,6 +288,7 @@ export type AgenceOrderByWithRelationInput = {
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  souscriptions?: Prisma.SouscriptionOrderByRelationAggregateInput
 }
 
 export type AgenceWhereUniqueInput = Prisma.AtLeast<{
@@ -305,6 +307,7 @@ export type AgenceWhereUniqueInput = Prisma.AtLeast<{
   commentaire?: Prisma.StringNullableFilter<"Agence"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agence"> | Date | string
+  souscriptions?: Prisma.SouscriptionListRelationFilter
 }, "id" | "email">
 
 export type AgenceOrderByWithAggregationInput = {
@@ -357,6 +360,7 @@ export type AgenceCreateInput = {
   commentaire?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  souscriptions?: Prisma.SouscriptionCreateNestedManyWithoutAgenceInput
 }
 
 export type AgenceUncheckedCreateInput = {
@@ -372,6 +376,7 @@ export type AgenceUncheckedCreateInput = {
   commentaire?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  souscriptions?: Prisma.SouscriptionUncheckedCreateNestedManyWithoutAgenceInput
 }
 
 export type AgenceUpdateInput = {
@@ -386,6 +391,7 @@ export type AgenceUpdateInput = {
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  souscriptions?: Prisma.SouscriptionUpdateManyWithoutAgenceNestedInput
 }
 
 export type AgenceUncheckedUpdateInput = {
@@ -401,6 +407,7 @@ export type AgenceUncheckedUpdateInput = {
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  souscriptions?: Prisma.SouscriptionUncheckedUpdateManyWithoutAgenceNestedInput
 }
 
 export type AgenceCreateManyInput = {
@@ -500,6 +507,11 @@ export type AgenceSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type AgenceNullableScalarRelationFilter = {
+  is?: Prisma.AgenceWhereInput | null
+  isNot?: Prisma.AgenceWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -524,6 +536,125 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type AgenceCreateNestedOneWithoutSouscriptionsInput = {
+  create?: Prisma.XOR<Prisma.AgenceCreateWithoutSouscriptionsInput, Prisma.AgenceUncheckedCreateWithoutSouscriptionsInput>
+  connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutSouscriptionsInput
+  connect?: Prisma.AgenceWhereUniqueInput
+}
+
+export type AgenceUpdateOneWithoutSouscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.AgenceCreateWithoutSouscriptionsInput, Prisma.AgenceUncheckedCreateWithoutSouscriptionsInput>
+  connectOrCreate?: Prisma.AgenceCreateOrConnectWithoutSouscriptionsInput
+  upsert?: Prisma.AgenceUpsertWithoutSouscriptionsInput
+  disconnect?: Prisma.AgenceWhereInput | boolean
+  delete?: Prisma.AgenceWhereInput | boolean
+  connect?: Prisma.AgenceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AgenceUpdateToOneWithWhereWithoutSouscriptionsInput, Prisma.AgenceUpdateWithoutSouscriptionsInput>, Prisma.AgenceUncheckedUpdateWithoutSouscriptionsInput>
+}
+
+export type AgenceCreateWithoutSouscriptionsInput = {
+  nomComplet: string
+  telephone: string
+  email: string
+  nomAgence: string
+  pays: string
+  ville: string
+  tailleAgence: string
+  logicielGestion: boolean
+  commentaire?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AgenceUncheckedCreateWithoutSouscriptionsInput = {
+  id?: number
+  nomComplet: string
+  telephone: string
+  email: string
+  nomAgence: string
+  pays: string
+  ville: string
+  tailleAgence: string
+  logicielGestion: boolean
+  commentaire?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type AgenceCreateOrConnectWithoutSouscriptionsInput = {
+  where: Prisma.AgenceWhereUniqueInput
+  create: Prisma.XOR<Prisma.AgenceCreateWithoutSouscriptionsInput, Prisma.AgenceUncheckedCreateWithoutSouscriptionsInput>
+}
+
+export type AgenceUpsertWithoutSouscriptionsInput = {
+  update: Prisma.XOR<Prisma.AgenceUpdateWithoutSouscriptionsInput, Prisma.AgenceUncheckedUpdateWithoutSouscriptionsInput>
+  create: Prisma.XOR<Prisma.AgenceCreateWithoutSouscriptionsInput, Prisma.AgenceUncheckedCreateWithoutSouscriptionsInput>
+  where?: Prisma.AgenceWhereInput
+}
+
+export type AgenceUpdateToOneWithWhereWithoutSouscriptionsInput = {
+  where?: Prisma.AgenceWhereInput
+  data: Prisma.XOR<Prisma.AgenceUpdateWithoutSouscriptionsInput, Prisma.AgenceUncheckedUpdateWithoutSouscriptionsInput>
+}
+
+export type AgenceUpdateWithoutSouscriptionsInput = {
+  nomComplet?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  nomAgence?: Prisma.StringFieldUpdateOperationsInput | string
+  pays?: Prisma.StringFieldUpdateOperationsInput | string
+  ville?: Prisma.StringFieldUpdateOperationsInput | string
+  tailleAgence?: Prisma.StringFieldUpdateOperationsInput | string
+  logicielGestion?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AgenceUncheckedUpdateWithoutSouscriptionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nomComplet?: Prisma.StringFieldUpdateOperationsInput | string
+  telephone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  nomAgence?: Prisma.StringFieldUpdateOperationsInput | string
+  pays?: Prisma.StringFieldUpdateOperationsInput | string
+  ville?: Prisma.StringFieldUpdateOperationsInput | string
+  tailleAgence?: Prisma.StringFieldUpdateOperationsInput | string
+  logicielGestion?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type AgenceCountOutputType
+ */
+
+export type AgenceCountOutputType = {
+  souscriptions: number
+}
+
+export type AgenceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  souscriptions?: boolean | AgenceCountOutputTypeCountSouscriptionsArgs
+}
+
+/**
+ * AgenceCountOutputType without action
+ */
+export type AgenceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgenceCountOutputType
+   */
+  select?: Prisma.AgenceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * AgenceCountOutputType without action
+ */
+export type AgenceCountOutputTypeCountSouscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SouscriptionWhereInput
+}
 
 
 export type AgenceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -539,6 +670,8 @@ export type AgenceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   commentaire?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  souscriptions?: boolean | Prisma.Agence$souscriptionsArgs<ExtArgs>
+  _count?: boolean | Prisma.AgenceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["agence"]>
 
 export type AgenceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -587,10 +720,18 @@ export type AgenceSelectScalar = {
 }
 
 export type AgenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nomComplet" | "telephone" | "email" | "nomAgence" | "pays" | "ville" | "tailleAgence" | "logicielGestion" | "commentaire" | "createdAt" | "updatedAt", ExtArgs["result"]["agence"]>
+export type AgenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  souscriptions?: boolean | Prisma.Agence$souscriptionsArgs<ExtArgs>
+  _count?: boolean | Prisma.AgenceCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type AgenceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type AgenceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $AgencePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Agence"
-  objects: {}
+  objects: {
+    souscriptions: Prisma.$SouscriptionPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nomComplet: string
@@ -998,6 +1139,7 @@ readonly fields: AgenceFieldRefs;
  */
 export interface Prisma__AgenceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  souscriptions<T extends Prisma.Agence$souscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Agence$souscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SouscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1056,6 +1198,10 @@ export type AgenceFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
+  /**
    * Filter, which Agence to fetch.
    */
   where: Prisma.AgenceWhereUniqueInput
@@ -1074,6 +1220,10 @@ export type AgenceFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
+  /**
    * Filter, which Agence to fetch.
    */
   where: Prisma.AgenceWhereUniqueInput
@@ -1091,6 +1241,10 @@ export type AgenceFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Agence
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
   /**
    * Filter, which Agence to fetch.
    */
@@ -1140,6 +1294,10 @@ export type AgenceFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
+  /**
    * Filter, which Agence to fetch.
    */
   where?: Prisma.AgenceWhereInput
@@ -1188,6 +1346,10 @@ export type AgenceFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
+  /**
    * Filter, which Agences to fetch.
    */
   where?: Prisma.AgenceWhereInput
@@ -1230,6 +1392,10 @@ export type AgenceCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Agence
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
   /**
    * The data needed to create a Agence.
    */
@@ -1278,6 +1444,10 @@ export type AgenceUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Agence
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
   /**
    * The data needed to update a Agence.
    */
@@ -1345,6 +1515,10 @@ export type AgenceUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
+  /**
    * The filter to search for the Agence to update in case it exists.
    */
   where: Prisma.AgenceWhereUniqueInput
@@ -1371,6 +1545,10 @@ export type AgenceDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
+  /**
    * Filter which Agence to delete.
    */
   where: Prisma.AgenceWhereUniqueInput
@@ -1391,6 +1569,30 @@ export type AgenceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Agence.souscriptions
+ */
+export type Agence$souscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Souscription
+   */
+  select?: Prisma.SouscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Souscription
+   */
+  omit?: Prisma.SouscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SouscriptionInclude<ExtArgs> | null
+  where?: Prisma.SouscriptionWhereInput
+  orderBy?: Prisma.SouscriptionOrderByWithRelationInput | Prisma.SouscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.SouscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SouscriptionScalarFieldEnum | Prisma.SouscriptionScalarFieldEnum[]
+}
+
+/**
  * Agence without action
  */
 export type AgenceDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1402,4 +1604,8 @@ export type AgenceDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Agence
    */
   omit?: Prisma.AgenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgenceInclude<ExtArgs> | null
 }

@@ -3,108 +3,82 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { ArrowRight, Check } from "lucide-react"
 
 const plans = [
   {
     name: "Starter",
-    priceMonthly: 29,
-    priceYearly: 26,
-    description: "Idéal pour les agences indépendantes qui démarrent.",
-    features: [
-      "Jusqu'à 10 biens",
-      "2 agents maximum",
-      "Gestion des clients & prospects",
-      "Calendrier & visites",
-      "Contrats de base",
-      "Facturation simple",
-      "Support par email",
-      "Listing sur la marketplace",
-    ],
+    priceMonthly: 20000,
+    agents: "jusqu'à 3 agents",
+    description: "Idéal pour les petites structures qui démarrent leur digitalisation.",
     highlighted: false,
-    cta: "Rejoindre la waitlist",
+    cta: "Souscrire",
+  },
+  {
+    name: "Business",
+    priceMonthly: 35000,
+    agents: "jusqu'à 6 agents",
+    description: "Le meilleur équilibre pour les agences en croissance active.",
+    highlighted: true,
+    cta: "Souscrire",
   },
   {
     name: "Pro",
-    priceMonthly: 59,
-    priceYearly: 53,
-    description: "Pour les agences en croissance qui veulent tout automatiser.",
-    features: [
-      "Tous les avantages du Starter, plus :",
-      "Jusqu'à 200 biens",
-      "10 agents maximum",
-      "CRM avancé avec scoring",
-      "Calendrier avec synchronisation externe",
-      "Contrats avec signature électronique",
-      "Facturation avancée & relances",
-      "Reporting & analytics",
-      "Support prioritaire",
-      "Export des données",
-    ],
-    highlighted: true,
-    cta: "Rejoindre la waitlist",
+    priceMonthly: 50000,
+    agents: "jusqu'à 10 agents",
+    description: "Pour les agences établies qui gèrent un volume important.",
+    highlighted: false,
+    cta: "Souscrire",
   },
+
   {
-    name: "Enterprise",
-    priceMonthly: "",
-    priceYearly: "",
-    description: "Pour les groupes immobiliers et agences multi-sites.",
+    name: "Licence entreprise",
+    priceMonthly: 2500000,
+    pricePrefix: "À partir de",
+    agents: "Acquerir une licence pour votre entreprise",
+    description: "Pour les groupes immobiliers, réseaux d'agences et besoins spécifiques.",
     features: [
-      "Tous les avantages du Pro, plus :",
-      "Biens illimités",
-      "Agents illimités",
-      "CRM avancé avec automatisation",
-      "Multi-agences & multi-sites",
-      "API et intégrations personnalisées",
-      "Contrats & signatures avancées",
-      "Facturation complète",
-      "Analytics avancées & export",
-      "Support dédié + onboarding",
-      "SLA garanti",
+      "Nombre d'agents personnalisé",
+      "Déploiement adapté à votre organisation",
+      "Personnalisation des fonctionnalités",
+      "Accompagnement dédié",
+      "Support prioritaire",
+      "Conditions commerciales sur mesure",
     ],
     highlighted: false,
-    cta: "Rejoindre la waitlist",
+    cta: "Nous contacter",
   },
 ]
 
 const faqs = [
   {
-    q: "Puis-je changer de forfait à tout moment ?",
-    a: "Oui, vous pouvez upgrader ou downgrader votre forfait à tout moment. Les modifications sont effectives immédiatement et le prorata est calculé automatiquement.",
-  },
-  {
     q: "Y a-t-il un engagement minimum ?",
-    a: "Aucun engagement minimum. Vous pouvez annuler votre abonnement à tout moment. Nous proposons des réductions pour les engagements annuels.",
+    a: "Oui, un engagement minimum de 3 mois est demandé pour bénéficier du service. Après cette période, vous pouvez renouveler ou modifier votre abonnement selon vos besoins.",
   },
   {
-    q: "Que se passe-t-il après la waitlist ?",
-    a: "Les membres de la waitlist seront les premiers informés du lancement et bénéficieront d'une offre spéciale de lancement avec une réduction significative.",
+    q: "Comment souscrire à Galle Connect Pro ?",
+    a: "Pour souscrire, remplissez simplement notre formulaire d'abonnement. Une fois votre demande envoyée, un membre de notre équipe vous contactera pour finaliser votre inscription et procéder au paiement.",
+  },
+  {
+    q: "Quelle est la différence entre les forfaits ?",
+    a: "Tous les forfaits donnent accès aux mêmes fonctionnalités principales de Galle Connect Pro. La différence se situe principalement au niveau du nombre d'agents autorisés et du niveau d'accompagnement proposé.",
   },
   {
     q: "Mes données sont-elles sécurisées ?",
-    a: "Absolument. Nous utilisons un chiffrement de bout en bout et nos serveurs sont hébergés en Europe, conformément au RGPD.",
+    a: "Oui. Nous mettons en place des mesures de sécurité pour protéger vos données et garantir la confidentialité des informations liées à votre agence, vos biens, vos clients et vos propriétaires.",
   },
   {
     q: "Proposez-vous une formation ?",
-    a: "Oui, tous les forfaits incluent un accès à notre base de connaissances. Les forfaits Pro et Enterprise incluent des sessions de formation personnalisées.",
+    a: "Oui, une formation est incluse dans tous les forfaits afin de vous accompagner dans la prise en main de Galle Connect Pro et vous permettre d'utiliser efficacement toutes les fonctionnalités.",
+  },
+  {
+    q: "Puis-je changer de forfait plus tard ?",
+    a: "Oui, vous pouvez faire évoluer votre abonnement selon la croissance de votre agence et vos besoins en nombre d'agents.",
   },
 ]
 
 export default function PricingPage() {
-  const [isYearly, setIsYearly] = useState(false)
-
-  const formatPrice = (price: number | string) => {
-    return price === "" || price === null || price === undefined ? "Contactez-nous" : `${price}€`
-  }
-
-  const getAnnualPrice = (monthly: number | string, yearly: number | string) => {
-    if (!monthly || !yearly) return "Contactez-nous"
-    const reduction = ((monthly - yearly) / monthly) * 100
-    return `${yearly * 12}€ / an (-${Math.round(reduction)}%)`
-  }
-
   return (
     <>
       <Navbar />
@@ -113,94 +87,56 @@ export default function PricingPage() {
         <section className="bg-background py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6 text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-[#d99306]">Tarifs</p>
-            <h1 className="mt-3 font-serif text-4xl font-bold text-[#374250] md:text-5xl lg:text-6xl text-balance">
+            <h1 className="mt-3 font-serif text-4xl font-bold text-[#374250] md:text-3xl lg:text-6xl text-balance">
               Des tarifs simples et transparents
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#3a3a3a]">
               Choisissez le forfait adapté à la taille de votre agence. Tous les forfaits incluent les mises à jour et le support.
             </p>
-
-            {/* Toggle */}
-            <div className="mt-10 flex items-center justify-center gap-4">
-              <span className={`text-sm font-medium ${!isYearly ? "text-[#374250]" : "text-[#3a3a3a]"}`}>
-                Mensuel
-              </span>
-              <button
-                onClick={() => setIsYearly(!isYearly)}
-                className={`relative h-7 w-12 rounded-full transition-colors ${isYearly ? "bg-[#d99306]" : "bg-border"}`}
-                aria-label="Basculer entre mensuel et annuel"
-              >
-                <span
-                  className={`absolute top-1 h-5 w-5 rounded-full bg-white shadow transition-transform ${isYearly ? "left-6" : "left-1"}`}
-                />
-              </button>
-              <span className={`text-sm font-medium ${isYearly ? "text-[#374250]" : "text-[#3a3a3a]"}`}>
-                Annuel
-              </span>
-            </div>
           </div>
         </section>
 
         {/* Plans */}
-        <section className="bg-card pb-16 pt-16 md:pb-24">
+        <section className="bg-card pb-5 pt-16 md:pb-24">
           <div className="mx-auto max-w-7xl px-6">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`relative flex flex-col rounded-xl border p-8 transition-shadow ${plan.highlighted
-                    ? "border-[#d99306] bg-background shadow-xl shadow-[#d99306]/10"
-                    : "border-border bg-background hover:shadow-md"
+                  className={`relative min-h-[500px] rounded-[2.25rem] border-2 p-5 sm:p-10 ${plan.highlighted
+                    ? "border-[#f5a000] bg-[#22313f] text-white shadow-xl shadow-[#d99306]/10"
+                    : "border-[#e7ebf0] bg-background text-[#22313f]"
                     }`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="rounded-full bg-[#d99306] px-4 py-1 text-xs font-semibold text-white">
+                    <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+                      <span className="rounded-full bg-[#f5a000] px-9 py-2 text-lg font-bold uppercase tracking-[0.18em] text-[#22313f]">
                         Populaire
                       </span>
                     </div>
                   )}
-                  <h3 className="text-xl font-bold text-[#374250]">{plan.name}</h3>
-                  <p className="mt-2 text-sm text-[#3a3a3a]">{plan.description}</p>
+                  <h3 className={`text-2xl font-bold sm:text-3xl ${plan.highlighted ? "text-white" : "text-[#22313f]"}`}>{plan.name}</h3>
+                  <p className={`mt-2 text sm:text ${plan.highlighted ? "text-slate-300" : "text-slate-500"}`}>{plan.agents}</p>
 
-                  <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-[#374250]">
-                      {formatPrice(isYearly ? plan.priceYearly : plan.priceMonthly)}
-                    </span>
-                    {isYearly && plan.priceMonthly && plan.priceYearly && (
-                      <span className="text-sm text-[#3a3a3a]">/mois</span>
-                    )}
+                  <div className="mt-10">
+                    {"pricePrefix" in plan && <p className={`mb-2 text-lg ${plan.highlighted ? "text-slate-300" : "text-slate-500"}`}>{plan.pricePrefix}</p>}
+                    <div className="flex flex-wrap items-baseline gap-x-2">
+                      <span className={`text-4xl font-bold sm:text-3xl ${plan.highlighted ? "text-[#f5a000]" : "text-[#22313f]"}`}>
+                        {plan.priceMonthly.toLocaleString("fr-FR")}
+                      </span>
+                      <span className={`text-xl font-bold ${plan.highlighted ? "text-slate-300" : "text-slate-500"}`}>FCFA</span>
+                      {plan.name !== "Licence entreprise" && <span className={`text-lg ${plan.highlighted ? "text-slate-300" : "text-slate-500"}`}>/ mois</span>}
+                    </div>
                   </div>
-                  {isYearly && plan.priceMonthly && plan.priceYearly && (
-                    <p className="mt-1 text-xs text-[#3a3a3a]">
-                      {getAnnualPrice(plan.priceMonthly, plan.priceYearly)}
-                    </p>
-                  )}
+                  <Button size="lg" asChild className={`mt-8 w-full ${plan.highlighted ? "bg-[#f5a000] text-[#22313f] hover:bg-[#df9000]" : "bg-[#22313f] text-white hover:bg-[#17232d]"}`}>
+                    <Link href="/souscription">Souscrire <ArrowRight className="h-4 w-4" /></Link>
+                  </Button>
 
-                  <ul className="mt-8 flex flex-1 flex-col gap-3">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3 text-sm text-[#374250]">
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#d99306]" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-8">
-                    <Button
-                      size="lg"
-                      asChild
-                      className={`w-full ${plan.highlighted
-                        ? "bg-[#d99306] text-white hover:bg-[#c08505]"
-                        : "bg-[#374250] text-white hover:bg-[#374250]/90"
-                        }`}
-                    >
-                      <Link href="/waitlist">
-                        {plan.cta}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
+                  <div className={`mt-10 border-t pt-5 ${plan.highlighted ? "border-slate-600" : "border-[#e7ebf0]"}`}>
+                    <p className={`text leading-relaxed ${plan.highlighted ? "text-slate-200" : "text-slate-500"}`}>{plan.description}</p>
                   </div>
+
+
                 </div>
               ))}
             </div>
@@ -211,7 +147,7 @@ export default function PricingPage() {
         <section className="bg-background py-16 md:py-24">
           <div className="mx-auto max-w-3xl px-6">
             <div className="text-center">
-              <h2 className="font-serif text-3xl font-bold text-[#374250] md:text-4xl text-balance">
+              <h2 className="text-3xl font-bold text-[#374250] md:text-4xl text-balance">
                 Questions fréquentes
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-[#3a3a3a]">

@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Agence: 'Agence'
+  Agence: 'Agence',
+  Souscription: 'Souscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -86,6 +87,23 @@ export const AgenceScalarFieldEnum = {
 } as const
 
 export type AgenceScalarFieldEnum = (typeof AgenceScalarFieldEnum)[keyof typeof AgenceScalarFieldEnum]
+
+
+export const SouscriptionScalarFieldEnum = {
+  id: 'id',
+  agenceId: 'agenceId',
+  offre: 'offre',
+  nombreUtilisateurs: 'nombreUtilisateurs',
+  modePaiement: 'modePaiement',
+  statut: 'statut',
+  conditionsAcceptees: 'conditionsAcceptees',
+  dateSouscription: 'dateSouscription',
+  dateValidation: 'dateValidation',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SouscriptionScalarFieldEnum = (typeof SouscriptionScalarFieldEnum)[keyof typeof SouscriptionScalarFieldEnum]
 
 
 export const SortOrder = {
