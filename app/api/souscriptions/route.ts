@@ -4,7 +4,6 @@ import { createSouscription, SouscriptionExistanteError } from "@/services/sousc
 
 const offres = ["STARTER", "BUSINESS", "PRO", "LICENCE"]
 const modesPaiement = ["ORANGE_MONEY", "WAVE", "VIREMENT_BANCAIRE"]
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 const offreLabels: Record<string, string> = {
   STARTER: "Starter — 20 000 FCFA",
@@ -41,7 +40,9 @@ export async function POST(req: Request) {
     const souscription = await createSouscription(data)
 
     // La souscription reste valide même si le service d'e-mail est indisponible.
-    resend.emails.send({
+    if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY)
+      resend.emails.send({
       from: "GalleConnect Pro <noreply@galleconnect.com>",
       to: process.env.RESEND_TO_EMAIL ?? "info@galleconnect.com",
       replyTo: data.email,
@@ -64,7 +65,10 @@ export async function POST(req: Request) {
           </div>
         </div>
       `,
-    }).catch((error) => console.error("Resend souscription email error:", error))
+      }).catch((error) => console.error("Resend souscription email error:", error))
+    } else {
+      console.error("RESEND_API_KEY est absente : notification de souscription non envoyée")
+    }
 
     return NextResponse.json(souscription, { status: 201 })
   } catch (error: unknown) {

@@ -4,15 +4,15 @@ import { Resend } from "resend"
 
 export const dynamic = "force-dynamic" // 
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: Request) {
   try {
     const data = await req.json()
     const agence = await createAgence(data)
 
     // L'email est secondaire — un échec ne doit pas bloquer l'inscription
-    resend.emails.send({
+    if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY)
+      resend.emails.send({
       from: "GalleConnect Pro <noreply@galleconnect.com>",
       to: process.env.RESEND_TO_EMAIL!,
       subject: "Nouvelle inscription sur la liste d'attente",
@@ -36,7 +36,10 @@ export async function POST(req: Request) {
           </div>
         </div>
       `,
-    }).catch((err) => console.error("Resend waitlist email error:", err))
+      }).catch((err) => console.error("Resend waitlist email error:", err))
+    } else {
+      console.error("RESEND_API_KEY est absente : notification de waitlist non envoyée")
+    }
 
     return NextResponse.json(agence, { status: 201 })
   } catch (error: any) {
